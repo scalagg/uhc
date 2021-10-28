@@ -2,6 +2,7 @@ package gg.scala.uhc
 
 import gg.scala.commons.ExtendedScalaPlugin
 import gg.scala.uhc.board.UhcBoardProvider
+import gg.scala.uhc.configuration.parser.ConfigEntryParser
 import gg.scala.uhc.nametag.UhcNametagProvider
 import gg.scala.uhc.visibility.UhcVisibilityProvider
 import net.evilblock.cubed.nametag.NametagHandler
@@ -25,6 +26,12 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         instance = this
 
         syncLoadCosmetics()
+        syncLoadResources()
+    }
+
+    private fun syncLoadResources()
+    {
+        ConfigEntryParser.initialLoad()
     }
 
     private fun syncLoadCosmetics()
