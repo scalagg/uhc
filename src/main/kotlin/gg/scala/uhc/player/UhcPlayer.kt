@@ -14,6 +14,8 @@ class UhcPlayer(
     var username: String
 ) : Savable
 {
+
+
     override fun save(): CompletableFuture<Void>
     {
         return UhcDataHandler.playerLayer.saveEntry(uniqueId.toString(), this)

@@ -1,9 +1,11 @@
 package gg.scala.uhc.command
 
+import gg.scala.lemon.player.LemonPlayer
 import gg.scala.uhc.configuration.UhcConfigMenu
 import net.evilblock.cubed.acf.BaseCommand
 import net.evilblock.cubed.acf.CommandHelp
 import net.evilblock.cubed.acf.annotation.*
+import net.evilblock.cubed.util.CC
 import org.bukkit.entity.Player
 
 /**
@@ -26,5 +28,21 @@ class UhcCommand : BaseCommand()
     fun onConfig(player: Player)
     {
         UhcConfigMenu().openMenu(player)
+    }
+
+    @Subcommand("host")
+    @CommandPermission("uhc.command.uhc.subcommand.host")
+    @Description("Set yourself, or another player as the UHC host.")
+    fun onHost(player: Player, @Optional target: LemonPlayer?)
+    {
+        val host = if (target != null)
+        {
+            target.bukkitPlayer!!
+        } else
+        {
+            player
+        }
+
+        player.sendMessage("${CC.PRI}${host.name}${CC.SEC} is now the game host.")
     }
 }

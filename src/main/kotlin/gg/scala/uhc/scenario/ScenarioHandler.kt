@@ -10,7 +10,17 @@ import net.evilblock.cubed.util.ClassUtils
 object ScenarioHandler
 {
     val scenarios = hashMapOf<String, Scenario>()
-    val selected = hashSetOf<Scenario>()
+    val selected = hashSetOf<String>()
+
+    fun applyAllSelectedScenarios()
+    {
+        selected.forEach {
+            val scenario = scenarios[it]
+                ?: return@forEach
+
+            scenario.initialize()
+        }
+    }
 
     fun initialLoad()
     {
