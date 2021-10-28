@@ -7,4 +7,5 @@ package gg.scala.uhc.schedule
 interface ScheduledExecutor
 {
     fun start()
+    fun invokeAt(): Int
 }

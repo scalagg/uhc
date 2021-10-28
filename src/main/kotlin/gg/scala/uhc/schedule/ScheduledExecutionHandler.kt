@@ -6,5 +6,10 @@ package gg.scala.uhc.schedule
  */
 object ScheduledExecutionHandler
 {
-    val executors = mutableMapOf<Long, ScheduledExecutor>()
+    val executors = hashSetOf<ScheduledExecutor>()
+
+    fun register(executor: ScheduledExecutor)
+    {
+        executors.add(executor)
+    }
 }

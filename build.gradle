@@ -19,7 +19,7 @@ dependencies {
     compileOnly "me.lucko:helper:5.6.8"
 
     compileOnly "io.papermc:paperlib:1.0.6"
-    compileOnly fileTree(dir: "lib")
+    compileOnly fileTree("lib")
 
     compileOnly "com.github.mkotb:ConfigAPI:e1c8df3f13"
     compileOnly "org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT"

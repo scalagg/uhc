@@ -4,6 +4,8 @@ import gg.scala.commons.ExtendedScalaPlugin
 import gg.scala.uhc.board.UhcBoardProvider
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
 import gg.scala.uhc.nametag.UhcNametagProvider
+import gg.scala.uhc.schedule.ScheduledExecutionHandler
+import gg.scala.uhc.schedule.impl.PvPEnableEventExecutor
 import gg.scala.uhc.visibility.UhcVisibilityProvider
 import net.evilblock.cubed.nametag.NametagHandler
 import net.evilblock.cubed.scoreboard.ScoreboardHandler
@@ -32,6 +34,8 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
     private fun syncLoadResources()
     {
         ConfigEntryParser.initialLoad()
+
+        ScheduledExecutionHandler.register(PvPEnableEventExecutor)
     }
 
     private fun syncLoadCosmetics()
