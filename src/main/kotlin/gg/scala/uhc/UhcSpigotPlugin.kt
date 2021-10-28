@@ -5,6 +5,7 @@ import gg.scala.uhc.board.UhcBoardProvider
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
 import gg.scala.uhc.nametag.UhcNametagProvider
 import gg.scala.uhc.schedule.ScheduledExecutionHandler
+import gg.scala.uhc.schedule.impl.FinalHealEventExecutor
 import gg.scala.uhc.schedule.impl.PvPEnableEventExecutor
 import gg.scala.uhc.visibility.UhcVisibilityProvider
 import net.evilblock.cubed.nametag.NametagHandler
@@ -36,6 +37,7 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         ConfigEntryParser.initialLoad()
 
         ScheduledExecutionHandler.register(PvPEnableEventExecutor)
+        ScheduledExecutionHandler.register(FinalHealEventExecutor)
     }
 
     private fun syncLoadCosmetics()
