@@ -1,0 +1,8 @@
+name: uhc
+version: 1.0.0
+main: gg.scala.uhc.UhcSpigotPlugin
+
+author: Scala
+website: https://scala.gg
+
+depend: [Lemon, Cubed, helper]
