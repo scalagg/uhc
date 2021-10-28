@@ -3,6 +3,7 @@ package gg.scala.uhc.schedule.impl
 import gg.scala.lemon.util.task.DiminutionRunnable
 import gg.scala.uhc.listener.PvPListener
 import gg.scala.uhc.schedule.ScheduledExecutor
+import gg.scala.uhc.sendToWhomHasEnabled
 import me.lucko.helper.Schedulers
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.time.TimeUtil
@@ -25,6 +26,8 @@ object PvPEnableEventExecutor
     {
         PvPListener.enable()
 
+        // everyone needs to know this, so we won't
+        // check for metadata like we are on onRun.
         broadcast("${CC.GREEN}PvP has been enabled!")
     }
 
@@ -35,6 +38,8 @@ object PvPEnableEventExecutor
 
     override fun onRun()
     {
-        broadcast("${CC.SEC}PvP will enable in ${CC.PRI}${TimeUtil.formatIntoDetailedString(seconds)}${CC.SEC}.")
+        sendToWhomHasEnabled(
+            "${CC.SEC}PvP will enable in ${CC.PRI}${TimeUtil.formatIntoDetailedString(seconds)}${CC.SEC}.", "uhc-broadcasts"
+        )
     }
 }

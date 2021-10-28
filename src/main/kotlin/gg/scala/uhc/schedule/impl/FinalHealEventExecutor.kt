@@ -3,6 +3,7 @@ package gg.scala.uhc.schedule.impl
 import gg.scala.lemon.util.task.DiminutionRunnable
 import gg.scala.uhc.listener.PvPListener
 import gg.scala.uhc.schedule.ScheduledExecutor
+import gg.scala.uhc.sendToWhomHasEnabled
 import me.lucko.helper.Schedulers
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.time.TimeUtil
@@ -30,6 +31,8 @@ object FinalHealEventExecutor
                 it.health = 20.0
             }
 
+        // everyone needs to know this, so we won't
+        // check for metadata like we are on onRun.
         broadcast("${CC.GREEN}The final heal has occurred!")
     }
 
@@ -40,6 +43,8 @@ object FinalHealEventExecutor
 
     override fun onRun()
     {
-        broadcast("${CC.SEC}Final Heal will occur in ${CC.PRI}${TimeUtil.formatIntoDetailedString(seconds)}${CC.SEC}.")
+        sendToWhomHasEnabled(
+            "${CC.SEC}Final Heal will occur in ${CC.PRI}${TimeUtil.formatIntoDetailedString(seconds)}${CC.SEC}.", "uhc-broadcasts"
+        )
     }
 }
