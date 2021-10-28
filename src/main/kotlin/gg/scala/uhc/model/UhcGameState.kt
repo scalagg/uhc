@@ -11,6 +11,6 @@ import gg.scala.uhc.handler.GameHandler
  */
 enum class UhcGameState
 {
-    WAITING, LOADING, SCATTERING,
+    WAITING, GENERATING, SCATTERING,
     STARTING, IN_GAME, ENDED
 }
