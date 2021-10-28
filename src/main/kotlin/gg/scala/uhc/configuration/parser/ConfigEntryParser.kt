@@ -25,9 +25,9 @@ object ConfigEntryParser
         adapters[String::class.java] = StringEntryParser()
     }
 
-    inline fun <reified T> promptPlayer(
+    fun <T> promptPlayer(
         clazz: Class<T>, player: Player,
-        crossinline lambda: (T) -> Unit
+        lambda: (T) -> Unit
     )
     {
         val adapter = adapters[clazz]
@@ -47,6 +47,8 @@ object ConfigEntryParser
             try
             {
                 lambda.invoke(adapter.parse(input) as T)
+
+                player.sendMessage("${CC.GREEN}You've set the value to ${CC.WHITE}$input${CC.GREEN}.")
             } catch (exception: Exception)
             {
                 player.sendMessage(

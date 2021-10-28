@@ -6,4 +6,5 @@ package gg.scala.uhc.configuration
  */
 object UhcGameConfig
 {
+    val entries = hashSetOf<UhcConfigEntry>()
 }

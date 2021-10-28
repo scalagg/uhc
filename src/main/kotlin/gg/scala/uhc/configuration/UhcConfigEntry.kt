@@ -10,5 +10,6 @@ class UhcConfigEntry(
     val title: String,
     val description: Array<String>,
     val indicator: XMaterial,
-    var currentValue: Any
+    var currentValue: Any,
+    val type: Class<*>
 )
