@@ -5,6 +5,7 @@ import gg.scala.lemon.Lemon
 import gg.scala.uhc.board.UhcBoardProvider
 import gg.scala.uhc.command.UhcCommand
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
+import gg.scala.uhc.handler.UhcUpdateHandler
 import gg.scala.uhc.listener.PlayerListener
 import gg.scala.uhc.listener.PvPListener
 import gg.scala.uhc.nametag.UhcNametagProvider
@@ -63,6 +64,7 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
     private fun syncLoadResources()
     {
         ConfigEntryParser.initialLoad()
+        UhcUpdateHandler.initialLoad()
 
         ScheduledExecutionHandler.register(PvPEnableEventExecutor)
         ScheduledExecutionHandler.register(FinalHealEventExecutor)
