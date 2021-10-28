@@ -1,6 +1,7 @@
 package gg.scala.uhc.player
 
 import gg.scala.common.Savable
+import gg.scala.uhc.handler.UhcDataHandler
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
@@ -15,6 +16,6 @@ class UhcPlayer(
 {
     override fun save(): CompletableFuture<Void>
     {
-        TODO("Not yet implemented")
+        return UhcDataHandler.playerLayer.saveEntry(uniqueId.toString(), this)
     }
 }
