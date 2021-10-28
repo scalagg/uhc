@@ -9,6 +9,7 @@ import gg.scala.uhc.handler.UhcUpdateHandler
 import gg.scala.uhc.listener.PlayerListener
 import gg.scala.uhc.listener.PvPListener
 import gg.scala.uhc.nametag.UhcNametagProvider
+import gg.scala.uhc.scenario.ScenarioHandler
 import gg.scala.uhc.schedule.ScheduledExecutionHandler
 import gg.scala.uhc.schedule.impl.FinalHealEventExecutor
 import gg.scala.uhc.schedule.impl.PvPEnableEventExecutor
@@ -65,6 +66,7 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
     {
         ConfigEntryParser.initialLoad()
         UhcUpdateHandler.initialLoad()
+        ScenarioHandler.initialLoad()
 
         ScheduledExecutionHandler.register(PvPEnableEventExecutor)
         ScheduledExecutionHandler.register(FinalHealEventExecutor)

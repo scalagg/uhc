@@ -50,12 +50,23 @@ class UhcConfigMenu : Menu()
                 description.add("${CC.WHITE}${entry.currentValue}")
                 description.add("")
 
-                description.add("${CC.YELLOW}Click to modify.")
+                description.add("${CC.YELLOW}Right-Click to edit.")
             }
         }
 
         override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView)
         {
+            if (!clickType.name.contains("RIGHT"))
+            {
+                return
+            }
+
+            if (!player.hasPermission("uhc.edit-config"))
+            {
+                player.sendMessage("${CC.RED}You do not have permission to edit the UHC config!")
+                return
+            }
+
             player.closeInventory()
 
             ConfigEntryParser.promptPlayer(

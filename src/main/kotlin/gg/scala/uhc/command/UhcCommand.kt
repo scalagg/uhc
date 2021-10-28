@@ -1,11 +1,10 @@
 package gg.scala.uhc.command
 
+import gg.scala.uhc.configuration.UhcConfigMenu
 import net.evilblock.cubed.acf.BaseCommand
 import net.evilblock.cubed.acf.CommandHelp
-import net.evilblock.cubed.acf.annotation.CommandAlias
-import net.evilblock.cubed.acf.annotation.CommandPermission
-import net.evilblock.cubed.acf.annotation.Default
-import net.evilblock.cubed.acf.annotation.HelpCommand
+import net.evilblock.cubed.acf.annotation.*
+import org.bukkit.entity.Player
 
 /**
  * @author GrowlyX
@@ -20,5 +19,12 @@ class UhcCommand : BaseCommand()
     fun onHelp(help: CommandHelp)
     {
         help.showHelp()
+    }
+
+    @Subcommand("config")
+    @Description("View and/or edit the UHC config.")
+    fun onConfig(player: Player)
+    {
+        UhcConfigMenu().openMenu(player)
     }
 }
