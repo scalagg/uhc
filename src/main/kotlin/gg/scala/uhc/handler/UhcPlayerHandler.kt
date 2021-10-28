@@ -13,6 +13,16 @@ object UhcPlayerHandler
 {
     private val handle = mutableMapOf<UUID, UhcPlayer>()
 
+    fun setup(uhcPlayer: UhcPlayer)
+    {
+        handle[uhcPlayer.uniqueId] = uhcPlayer
+    }
+
+    fun saveAndForget(player: Player)
+    {
+        handle.remove(player.uniqueId)?.save()
+    }
+
     fun find(uuid: UUID): UhcPlayer?
     {
         return handle[uuid]

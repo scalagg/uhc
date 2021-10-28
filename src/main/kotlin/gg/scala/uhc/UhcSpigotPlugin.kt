@@ -5,6 +5,8 @@ import gg.scala.lemon.Lemon
 import gg.scala.uhc.board.UhcBoardProvider
 import gg.scala.uhc.command.UhcCommand
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
+import gg.scala.uhc.listener.PlayerListener
+import gg.scala.uhc.listener.PvPListener
 import gg.scala.uhc.nametag.UhcNametagProvider
 import gg.scala.uhc.schedule.ScheduledExecutionHandler
 import gg.scala.uhc.schedule.impl.FinalHealEventExecutor
@@ -34,6 +36,18 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         syncLoadCosmetics()
         syncLoadResources()
         syncLoadCommands()
+        syncLoadListeners()
+    }
+
+    private fun syncLoadListeners()
+    {
+        PvPListener.initialLoad()
+
+        server.pluginManager.registerEvents(
+            PlayerListener, this
+        )
+
+        logger.info("Loaded all listeners.")
     }
 
     private fun syncLoadCommands()
@@ -42,6 +56,8 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
 
         Lemon.instance.registerCompletionsAndContexts(manager)
         Lemon.instance.registerCommandsInPackage(manager, "gg.scala.uhc.command")
+
+        logger.info("Registered all commands.")
     }
 
     private fun syncLoadResources()
@@ -50,6 +66,8 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
 
         ScheduledExecutionHandler.register(PvPEnableEventExecutor)
         ScheduledExecutionHandler.register(FinalHealEventExecutor)
+
+        logger.info("Scheduled in-game events.")
     }
 
     private fun syncLoadCosmetics()
@@ -59,6 +77,6 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         NametagHandler.registerProvider(UhcNametagProvider)
         VisibilityHandler.registerAdapter("uhc", UhcVisibilityProvider)
 
-        logger.info("Loaded cosmetic functionality")
+        logger.info("Loaded cosmetic functionality.")
     }
 }
