@@ -51,7 +51,6 @@ class UhcConfigMenu : Menu()
                 }
                 
                 description.add(
-                    "", 
                     "${CC.GRAY}Current Value:", 
                     "${CC.WHITE}${entry.currentValue}",
                     "",
