@@ -87,7 +87,7 @@ object UhcBoardProvider : ScoreboardAdapter()
                     "Kills: ${CC.PRI}${
                         killsOf(player)
                     }",
-                    // TODO: 10/29/2021 update 
+                    // TODO: 10/29/2021 update
                     "Border: ${CC.PRI}${
                         killsOf(player)
                     }"

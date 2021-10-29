@@ -1,6 +1,7 @@
 package gg.scala.uhc.command
 
 import gg.scala.uhc.configuration.UhcConfigMenu
+import gg.scala.uhc.scenario.ScenarioMenu
 import net.evilblock.cubed.acf.BaseCommand
 import net.evilblock.cubed.acf.annotation.CommandAlias
 import net.evilblock.cubed.acf.annotation.Description
@@ -23,7 +24,6 @@ class ConfigCommand : BaseCommand()
     @Description("View all UHC scenarios.")
     fun onScenario(player: Player)
     {
-        // TODO: 10/29/2021 create scenario display menu
-        UhcConfigMenu().openMenu(player)
+        ScenarioMenu().openMenu(player)
     }
 }
