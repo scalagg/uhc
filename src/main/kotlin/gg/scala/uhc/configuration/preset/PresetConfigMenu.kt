@@ -1,9 +1,11 @@
 package gg.scala.uhc.configuration.preset
 
 import gg.scala.uhc.add
+import gg.scala.uhc.configuration.UhcConfigMenu
 import net.evilblock.cubed.menu.Button
-import net.evilblock.cubed.menu.pagination.PaginatedMenu
+import net.evilblock.cubed.menu.Menu
 import net.evilblock.cubed.util.CC
+import net.evilblock.cubed.util.bukkit.Tasks
 import net.evilblock.cubed.util.text.TextSplitter
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -14,21 +16,29 @@ import org.bukkit.inventory.InventoryView
  * @author GrowlyX
  * @since 10/29/2021
  */
-class PresetConfigMenu : PaginatedMenu()
+class PresetConfigMenu : Menu("Preset Configs")
 {
-    override fun getAllPagesButtons(player: Player): Map<Int, Button>
+    override fun onClose(player: Player, manualClose: Boolean)
     {
-        return hashMapOf<Int, Button>().also { buttons ->
-            PresetConfigHandler.handle.forEach {
-                buttons[buttons.size] = PresetConfigButton(it.value)
+        if (manualClose)
+        {
+            Tasks.delayed(1L)
+            {
+                UhcConfigMenu().openMenu(player)
             }
         }
     }
 
-    override fun getPrePaginatedTitle(player: Player): String
+    override fun getButtons(player: Player): Map<Int, Button>
     {
-        return "Preset Configs"
+        return hashMapOf<Int, Button>().also { buttons ->
+            PresetConfigHandler.handle.forEach {
+                buttons[10 + buttons.size] = PresetConfigButton(it.value)
+            }
+        }
     }
+
+    override fun size(buttons: Map<Int, Button>): Int = 27
 
     private inner class PresetConfigButton(
         private val config: PresetConfig

@@ -2,9 +2,11 @@ package gg.scala.uhc.configuration
 
 import gg.scala.uhc.add
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
+import gg.scala.uhc.configuration.preset.PresetConfigMenu
 import net.evilblock.cubed.menu.Button
-import net.evilblock.cubed.menu.Menu
+import net.evilblock.cubed.menu.pagination.PaginatedMenu
 import net.evilblock.cubed.util.CC
+import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
@@ -14,15 +16,47 @@ import org.bukkit.inventory.InventoryView
  * @author GrowlyX
  * @since 10/28/2021
  */
-class UhcConfigMenu : Menu()
+class UhcConfigMenu : PaginatedMenu()
 {
-    override fun getButtons(player: Player): Map<Int, Button>
+    init {
+        placeholdBorders = true
+    }
+
+    override fun getButtonsStartOffset(): Int = 1
+    override fun size(buttons: Map<Int, Button>): Int = 45
+
+    override fun getGlobalButtons(player: Player): Map<Int, Button>
+    {
+        return hashMapOf(
+            4 to ItemBuilder(Material.MAGMA_CREAM)
+                .name("${CC.B_SEC}Config Presets")
+                .addToLore(
+                    "${CC.GRAY}View multiple config",
+                    "${CC.GRAY}presets for you to apply.",
+                    "",
+                    "${CC.GREEN}[Click to view presets]"
+                )
+                .toButton { _, _ ->
+                    PresetConfigMenu().openMenu(player)
+                }
+        )
+    }
+
+    override fun getAllPagesButtons(player: Player): Map<Int, Button>
     {
         return hashMapOf<Int, Button>().also { buttons ->
             UhcGameConfig.entries.forEach {
                 buttons[buttons.size] = ConfigEntryButton(it)
             }
         }
+    }
+
+    override fun getPrePaginatedTitle(player: Player): String = if (player.hasPermission("uhc.edit-config"))
+    {
+        "Editing Configuration"
+    } else
+    {
+        "Viewing Configuration"
     }
 
     private inner class ConfigEntryButton(
