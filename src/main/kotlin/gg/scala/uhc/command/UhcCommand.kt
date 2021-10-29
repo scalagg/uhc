@@ -4,6 +4,7 @@ import gg.scala.lemon.player.LemonPlayer
 import gg.scala.uhc.configuration.UhcConfigMenu
 import net.evilblock.cubed.acf.BaseCommand
 import net.evilblock.cubed.acf.CommandHelp
+import net.evilblock.cubed.acf.ConditionFailedException
 import net.evilblock.cubed.acf.annotation.*
 import net.evilblock.cubed.util.CC
 import org.bukkit.entity.Player
@@ -36,7 +37,7 @@ class UhcCommand : BaseCommand()
     fun onHost(player: Player, @Optional target: LemonPlayer?)
     {
         val host = if (target != null) target.bukkitPlayer!! else player
-        
+
         if (!player.hasPermission("uhc.command.uhc.subcommand.host.other") && target != null)
         {
             throw ConditionFailedException("You don't have permission to set other players as the UHC host!")

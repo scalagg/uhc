@@ -45,7 +45,6 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         syncLoadCommands()
         syncLoadListeners()
 
-        // Setting the whitelist to true
         Bukkit.setWhitelist(true)
     }
 
