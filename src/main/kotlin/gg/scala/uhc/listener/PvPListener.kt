@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
  * @author GrowlyX
  * @since 10/28/2021
  */
-object PvPListener
+object PvPListener : Listener
 {
     private var enabled = false
 
@@ -22,10 +22,9 @@ object PvPListener
         enabled = false
     }
 
-    fun initialLoad()
+    @EventHandler
+    fun onEntityDamageByEntity(event: EntityDamageByEntityEvent)
     {
-        Events.subscribe(EntityDamageByEntityEvent::class.java).handler {
-            // TODO: 10/28/2021 add pvp logic here
-        }
+        // TODO: Handle PvP logic here (all UHC modes)
     }
 }
