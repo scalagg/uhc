@@ -10,7 +10,7 @@ import net.evilblock.cubed.util.time.Duration
  */
 object BorderIntervalConfig : UhcConfigEntry(
     "Border Time", arrayOf(),
-    XMaterial.BEDROCK,
+    XMaterial.CLOCK,
     Duration.parse("30m"),
     Duration::class.java
 )

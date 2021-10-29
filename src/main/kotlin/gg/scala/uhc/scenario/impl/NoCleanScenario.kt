@@ -9,7 +9,10 @@ import org.bukkit.event.Listener
  */
 class NoCleanScenario : Scenario(
     "NoClean", arrayOf(
-        "Something something,"
+        "A timer is enabled whenever",
+        "you get a kill allowing you to",
+        "collect the dead player's items",
+        "without being attacked."
     )
 ), Listener
 {
