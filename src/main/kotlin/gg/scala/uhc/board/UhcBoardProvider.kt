@@ -50,13 +50,6 @@ object UhcBoardProvider : ScoreboardAdapter()
                         board.add("${CC.GRAY}• ${CC.PRI}$it")
                     }
                 }
-
-                if (UhcGameHandler.state == UhcGameState.GENERATING)
-                {
-                    board.add(
-                        "", "${CC.GOLD}World generating..."
-                    )
-                }
             }
         }
 
@@ -65,5 +58,7 @@ object UhcBoardProvider : ScoreboardAdapter()
         board.add("${CC.GRAY}${CC.STRIKE_THROUGH}-------------------")
     }
 
-    override fun getTitle(player: Player): String = "${CC.B_PRI}Bar ${CC.GRAY}❘${CC.WHITE} UHC"
+    override fun getTitle(player: Player): String {
+        return "${CC.B_PRI}UHC ${UhcGameHandler.type.formatted.uppercase()}"
+    }
 }
