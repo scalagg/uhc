@@ -12,6 +12,14 @@ object UhcVisibilityProvider : VisibilityAdapter
 {
     override fun getAction(toRefresh: Player, refreshFor: Player): VisibilityAction
     {
-        TODO("Not yet implemented")
+        if (toRefresh.hasMetaData("spectating") && !refreshFor.hasMetaData("spectating"))
+        {
+            return VisibilityAction.HIDE
+        } else if (toRefresh.hasMetaData("host") && !refreshFor.hasMetaData("host"))
+        {
+            return VisibilityAction.HIDE
+        }
+        
+        return VisibilityAction.NEUTRAL
     }
 }
