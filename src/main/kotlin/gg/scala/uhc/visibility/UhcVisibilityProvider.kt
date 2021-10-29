@@ -2,6 +2,7 @@ package gg.scala.uhc.visibility
 
 import net.evilblock.cubed.visibility.VisibilityAction
 import net.evilblock.cubed.visibility.VisibilityAdapter
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 /**
@@ -12,11 +13,11 @@ object UhcVisibilityProvider : VisibilityAdapter
 {
     override fun getAction(toRefresh: Player, refreshFor: Player): VisibilityAction
     {
-        if (toRefresh.hasMetaData("spectating") && refreshFor.hasMetaData("spectating"))
+        if (toRefresh.hasMetadata("spectating") && refreshFor.hasMetadata("spectating"))
         {
-            val scoreboard = toRefresh.scoreboard 
-                  ?: Bukkit.createNewScoreboard(toRefresh)
-                  
+            val scoreboard = toRefresh.scoreboard
+                  ?: Bukkit.getScoreboardManager().newScoreboard
+
             val ghostTeam = scoreboard.getTeam("ghost")
 
             if (!ghostTeam.hasEntry(toRefresh.name)) {
@@ -25,11 +26,11 @@ object UhcVisibilityProvider : VisibilityAdapter
             if (!ghostTeam.hasEntry(refreshFor.name)) {
                 ghostTeam.addEntry(refreshFor.name)
             }
-        } else if (toRefresh.hasMetaData("spectating") && !refreshFor.hasMetaData("spectating"))
+        } else if (toRefresh.hasMetadata("spectating") && !refreshFor.hasMetadata("spectating"))
         {
             return VisibilityAction.HIDE
         }
-        
+
         return VisibilityAction.NEUTRAL
     }
 }
