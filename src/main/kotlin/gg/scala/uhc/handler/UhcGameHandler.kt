@@ -23,5 +23,7 @@ object UhcGameHandler
 
     var host: Player? = null
 
+    var initial = 0
+
 
 }

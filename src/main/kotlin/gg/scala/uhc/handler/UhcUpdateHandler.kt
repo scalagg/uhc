@@ -23,7 +23,7 @@ object UhcUpdateHandler : Runnable
             .metaData["game-server-type"] = "uhc"
 
         Schedulers.async().runRepeating(
-            this, 0L, 20L
+            this, 0L, 10L
         )
     }
 

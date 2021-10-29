@@ -2,7 +2,10 @@ package gg.scala.uhc.board
 
 import gg.scala.lemon.util.QuickAccess
 import gg.scala.uhc.add
+import gg.scala.uhc.handler.UhcDataHandler
 import gg.scala.uhc.handler.UhcGameHandler
+import gg.scala.uhc.handler.UhcUpdateHandler
+import gg.scala.uhc.killsOf
 import gg.scala.uhc.model.UhcGameState
 import gg.scala.uhc.model.UhcGameType
 import gg.scala.uhc.scenario.ScenarioHandler
@@ -57,6 +60,38 @@ object UhcBoardProvider : ScoreboardAdapter()
                         "${CC.RED}currently selected."
                     )
                 }
+            }
+            UhcGameState.SCATTERING ->
+            {
+                board.add(
+                    "${CC.PRI}Scattering:",
+                    "Scattered: ${CC.PRI}${
+                        UhcUpdateHandler.scattered
+                    }/${
+                        UhcUpdateHandler.remaining
+                    }",
+                    // TODO: 10/29/2021 update
+                    "Starting In: ${CC.PRI}"
+                )
+            }
+            UhcGameState.STARTING ->
+            {
+                board.add(
+                    // TODO: 10/29/2021 update
+                    "Starting In: ${CC.PRI}",
+                    "Remaining: ${CC.PRI}${
+                        UhcUpdateHandler.remaining
+                    }/${
+                        UhcGameHandler.initial
+                    }",
+                    "Kills: ${CC.PRI}${
+                        killsOf(player)
+                    }",
+                    // TODO: 10/29/2021 update 
+                    "Border: ${CC.PRI}${
+                        killsOf(player)
+                    }"
+                )
             }
         }
 

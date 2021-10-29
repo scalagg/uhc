@@ -6,6 +6,7 @@ import net.evilblock.cubed.util.bukkit.FancyMessage
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
+import org.bukkit.entity.Player
 import java.util.*
 
 /**
@@ -43,6 +44,24 @@ fun sendToWhomHasEnabled(message: FancyMessage, value: String)
         .forEach { player ->
             message.sendToPlayer(player)
         }
+}
+
+fun killsOf(player: Player): Int
+{
+    return if (player.hasMetadata("kills"))
+    {
+        val metadata = player.getMetadata("kills")
+
+        if (metadata.isEmpty())
+        {
+            return 0
+        }
+
+        player.getMetadata("kills")[0].asInt()
+    } else
+    {
+        0
+    }
 }
 
 fun <T> MutableList<T>.add(vararg values: T)
