@@ -1,4 +1,4 @@
-package gg.scala.uhc.configuration.defaults
+package gg.scala.uhc.configuration.defaults.border
 
 import com.cryptomorin.xseries.XMaterial
 import gg.scala.uhc.configuration.UhcConfigEntry

@@ -1,5 +1,6 @@
 package gg.scala.uhc.configuration
 
+import gg.scala.uhc.add
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.menu.Menu
@@ -49,13 +50,19 @@ class UhcConfigMenu : Menu()
 
                     description.add("")
                 }
-                
+
                 description.add(
-                    "${CC.GRAY}Current Value:", 
+                    "${CC.GRAY}Current Value:",
                     "${CC.WHITE}${entry.currentValue}",
-                    "",
-                    "${CC.YELLOW}Right-Click to edit."
                 )
+
+                if (player.hasPermission("uhc.edit-config"))
+                {
+                    description.add(
+                        "",
+                        "${CC.YELLOW}Right-Click to edit."
+                    )
+                }
             }
         }
 
@@ -68,7 +75,6 @@ class UhcConfigMenu : Menu()
 
             if (!player.hasPermission("uhc.edit-config"))
             {
-                player.sendMessage("${CC.RED}You do not have permission to edit the UHC config!")
                 return
             }
 

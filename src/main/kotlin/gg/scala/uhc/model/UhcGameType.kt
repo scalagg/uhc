@@ -5,7 +5,7 @@ package gg.scala.uhc.model
  * @since 10/28/2021
  */
 enum class UhcGameType(
-    val formatted: String
+    val formatted: String,
 )
 {
     FFA("FFA"),
