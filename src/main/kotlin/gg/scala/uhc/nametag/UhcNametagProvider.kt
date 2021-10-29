@@ -14,6 +14,9 @@ object UhcNametagProvider : NametagProvider(
 {
     override fun fetchNametag(toRefresh: Player, refreshFor: Player): NametagInfo?
     {
-        TODO("Not yet implemented")
+        return if (toRefresh.hasMetaData("spectating"))
+        {
+            return createNewNametag(CC.GRAY, "")
+        } else null
     }
 }
