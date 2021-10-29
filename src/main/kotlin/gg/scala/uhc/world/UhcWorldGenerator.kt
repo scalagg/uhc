@@ -41,16 +41,6 @@ object UhcWorldGenerator
         val lock = File("uhc", "gen.lock")
         lock.createNewFile()
 
-        Bukkit.getWorlds().forEach {
-            for (entity in it.entities)
-            {
-                if (entity !is Player)
-                {
-                    entity.remove()
-                }
-            }
-        }
-
         world.setGameRuleValue("doMobSpawning", "false")
         world.setGameRuleValue("doDaylightCycle", "false")
         world.setGameRuleValue("naturalRegeneration", "false")
@@ -96,7 +86,6 @@ object UhcWorldGenerator
             world, 0.5, (world.getHighestBlockYAt(0, 0) + 15).toDouble(), 0.5
         )
 
-//        val borderHandler: BorderHandler = Meetup.getInstance().getBorderHandler()
-//        borderHandler.setBorder(100)
+        UhcBorderHandler.setBorder(100)
     }
 }
