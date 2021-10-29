@@ -41,16 +41,22 @@ class UhcConfigMenu : Menu()
         override fun getDescription(player: Player): List<String>
         {
             return mutableListOf<String>().also { description ->
-                entry.description.forEach {
-                    description.add("${CC.GRAY}$it")
+                if (entry.description.isNotEmpty())
+                {
+                    entry.description.forEach {
+                      description.add("${CC.GRAY}$it")
+                    }
+
+                    description.add("")
                 }
-
-                description.add("")
-                description.add("${CC.GRAY}Current Value:")
-                description.add("${CC.WHITE}${entry.currentValue}")
-                description.add("")
-
-                description.add("${CC.YELLOW}Right-Click to edit.")
+                
+                description.add(
+                    "", 
+                    "${CC.GRAY}Current Value:", 
+                    "${CC.WHITE}${entry.currentValue}",
+                    "",
+                    "${CC.YELLOW}Right-Click to edit."
+                )
             }
         }
 
