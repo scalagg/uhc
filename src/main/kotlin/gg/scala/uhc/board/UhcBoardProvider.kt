@@ -39,16 +39,22 @@ object UhcBoardProvider : ScoreboardAdapter()
                     }"
                 )
 
+                board.add(
+                    "",
+                    "Scenarios (${CC.PRI}/scenarios${CC.RESET}):"
+                )
+                
                 if (ScenarioHandler.selected.isNotEmpty())
                 {
-                    board.add(
-                        "",
-                        "Scenarios (${CC.PRI}/scenarios${CC.RESET}):"
-                    )
-
                     ScenarioHandler.selected.forEach {
                         board.add("${CC.GRAY}• ${CC.PRI}$it")
                     }
+                } else
+                {
+                    board.add(
+                        "${CC.RED}No scenarios are",
+                        "${CC.RED}currently selected."
+                    )
                 }
             }
         }
