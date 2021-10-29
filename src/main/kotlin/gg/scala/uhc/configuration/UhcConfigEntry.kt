@@ -6,7 +6,7 @@ import com.cryptomorin.xseries.XMaterial
  * @author GrowlyX
  * @since 10/28/2021
  */
-class UhcConfigEntry(
+open class UhcConfigEntry(
     val title: String,
     val description: Array<String>,
     val indicator: XMaterial,
