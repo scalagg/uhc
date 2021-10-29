@@ -12,10 +12,20 @@ object UhcVisibilityProvider : VisibilityAdapter
 {
     override fun getAction(toRefresh: Player, refreshFor: Player): VisibilityAction
     {
-        if (toRefresh.hasMetaData("spectating") && !refreshFor.hasMetaData("spectating"))
+        if (toRefresh.hasMetaData("spectating") && refreshFor.hasMetaData("spectating"))
         {
-            return VisibilityAction.HIDE
-        } else if (toRefresh.hasMetaData("host") && !refreshFor.hasMetaData("host"))
+            val scoreboard = toRefresh.scoreboard 
+                  ?: Bukkit.createNewScoreboard(toRefresh)
+                  
+            val ghostTeam = scoreboard.getTeam("ghost")
+
+            if (!ghostTeam.hasEntry(toRefresh.name)) {
+                ghostTeam.addEntry(toRefresh.name)
+            }
+            if (!ghostTeam.hasEntry(refreshFor.name)) {
+                ghostTeam.addEntry(refreshFor.name)
+            }
+        } else if (toRefresh.hasMetaData("spectating") && !refreshFor.hasMetaData("spectating"))
         {
             return VisibilityAction.HIDE
         }
