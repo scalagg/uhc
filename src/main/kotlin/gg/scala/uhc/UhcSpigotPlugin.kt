@@ -45,13 +45,21 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         // Setting the whitelist to true
         Bukkit.setWhitelist(true)
     }
+    
+    private fun internalListenerLoad(vararg listeners: Listener)
+    {
+        for (listener in listeners)
+        {
+            server.pluginManager.registerEvents(
+                listener, this
+            )
+        }
+    }
 
     private fun syncLoadListeners()
     {
-        PvPListener.initialLoad()
-
-        server.pluginManager.registerEvents(
-            PlayerListener, this
+        internalListenerLoad(
+            PvPListener, PlayerListener
         )
 
         logger.info("Loaded all listeners.")
