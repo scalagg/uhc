@@ -3,7 +3,6 @@ package gg.scala.uhc
 import gg.scala.commons.ExtendedScalaPlugin
 import gg.scala.lemon.Lemon
 import gg.scala.uhc.board.UhcBoardProvider
-import gg.scala.uhc.command.UhcCommand
 import gg.scala.uhc.configuration.UhcGameConfig
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
 import gg.scala.uhc.configuration.preset.PresetConfigHandler
@@ -15,7 +14,7 @@ import gg.scala.uhc.nametag.UhcNametagProvider
 import gg.scala.uhc.scenario.ScenarioHandler
 import gg.scala.uhc.schedule.ScheduledExecutionHandler
 import gg.scala.uhc.schedule.impl.FinalHealEventExecutor
-import gg.scala.uhc.schedule.impl.PvPEnableEventExecutor
+import gg.scala.uhc.schedule.impl.GracePeriodEventExecutor
 import gg.scala.uhc.visibility.UhcVisibilityProvider
 import net.evilblock.cubed.command.manager.CubedCommandManager
 import net.evilblock.cubed.nametag.NametagHandler
@@ -89,7 +88,7 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         ScenarioHandler.initialLoad()
         UhcGameConfig.initialLoad()
 
-        ScheduledExecutionHandler.register(PvPEnableEventExecutor)
+        ScheduledExecutionHandler.register(GracePeriodEventExecutor)
         ScheduledExecutionHandler.register(FinalHealEventExecutor)
 
         logger.info("Scheduled in-game events.")
