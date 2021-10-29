@@ -35,12 +35,11 @@ class UhcCommand : BaseCommand()
     @Description("Set yourself, or another player as the UHC host.")
     fun onHost(player: Player, @Optional target: LemonPlayer?)
     {
-        val host = if (target != null)
+        val host = if (target != null) target.bukkitPlayer!! else player
+        
+        if (!player.hasPermission("uhc.command.uhc.subcommand.host.other") && target != null)
         {
-            target.bukkitPlayer!!
-        } else
-        {
-            player
+            throw ConditionFailedException("You don't have permission to set other players as the UHC host!")
         }
 
         player.sendMessage("${CC.PRI}${host.name}${CC.SEC} is now the game host.")
