@@ -2,6 +2,7 @@ package gg.scala.uhc.schedule.impl
 
 import gg.scala.lemon.util.task.DiminutionRunnable
 import gg.scala.uhc.border.UhcBorderHandler
+import gg.scala.uhc.configuration.defaults.border.BorderIntervalConfig
 import gg.scala.uhc.configuration.defaults.border.BorderSizeConfig
 import gg.scala.uhc.schedule.ScheduledExecutor
 import gg.scala.uhc.sendToWhomHasEnabled
@@ -16,6 +17,11 @@ import net.evilblock.cubed.util.time.TimeUtil
  */
 class BorderUpdateEventExecutor : ScheduledExecutor
 {
+    private val broadcastIntervals = listOf(
+        18000, 14400, 10800, 7200, 3600, 2700, 1800, 900, 600,
+        300, 240, 180, 120, 60, 50, 40, 30, 15, 10, 5, 4, 3, 2, 1
+    )
+
     var currentUpdateTask: Task? = null
 
     private val oneHundredIntervals = arrayOf(50, 25, 10)
@@ -28,7 +34,9 @@ class BorderUpdateEventExecutor : ScheduledExecutor
         currentInterval = BorderSizeConfig.currentValue as Int
 
         currentUpdateTask = Schedulers.async().runRepeating(
-            BorderUpdateRunnable(2700, currentInterval),
+            BorderUpdateRunnable(
+                BorderIntervalConfig.currentValue as Int, currentInterval
+            ),
             0L, 20L
         )
     }
@@ -56,7 +64,7 @@ class BorderUpdateEventExecutor : ScheduledExecutor
     {
         override fun getSeconds(): List<Int>
         {
-            return listOf(18000, 14400, 10800, 7200, 3600, 2700, 1800, 900, 600, 300, 240, 180, 120, 60, 50, 40, 30, 15, 10, 5, 4, 3, 2, 1)
+            return broadcastIntervals
         }
 
         override fun onEnd()
@@ -77,7 +85,9 @@ class BorderUpdateEventExecutor : ScheduledExecutor
             if (currentInterval != next)
             {
                 currentUpdateTask = Schedulers.async().runRepeating(
-                    BorderUpdateRunnable(2700, currentInterval),
+                    BorderUpdateRunnable(
+                        BorderIntervalConfig.currentValue as Int, currentInterval
+                    ),
                     0L, 20L
                 )
             }
