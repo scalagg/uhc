@@ -18,12 +18,30 @@ import org.bukkit.inventory.InventoryView
  */
 class UhcConfigMenu : PaginatedMenu()
 {
+    companion object {
+        val BUTTON_SLOTS = listOf(
+            10, 11, 12, 13, 14, 15, 16,
+            19, 20, 21, 22, 23, 24, 25,
+            28, 29, 30, 31, 32, 33, 34,
+            37, 38, 39, 40, 41, 42, 43,
+        )
+    }
+
     init {
         placeholdBorders = true
     }
 
-    override fun getButtonsStartOffset(): Int = 1
-    override fun size(buttons: Map<Int, Button>): Int = 45
+    override fun size(buttons: Map<Int, Button>): Int = 54
+
+    override fun getAllPagesButtonSlots(): List<Int> = BUTTON_SLOTS
+    override fun getAllPagesButtons(player: Player): Map<Int, Button>
+    {
+        return hashMapOf<Int, Button>().also { buttons ->
+            UhcGameConfig.entries.forEach {
+                buttons[buttons.size] = ConfigEntryButton(it)
+            }
+        }
+    }
 
     override fun getGlobalButtons(player: Player): Map<Int, Button>
     {
@@ -40,15 +58,6 @@ class UhcConfigMenu : PaginatedMenu()
                     PresetConfigMenu().openMenu(player)
                 }
         )
-    }
-
-    override fun getAllPagesButtons(player: Player): Map<Int, Button>
-    {
-        return hashMapOf<Int, Button>().also { buttons ->
-            UhcGameConfig.entries.forEach {
-                buttons[buttons.size] = ConfigEntryButton(it)
-            }
-        }
     }
 
     override fun getPrePaginatedTitle(player: Player): String = if (player.hasPermission("uhc.edit-config"))
