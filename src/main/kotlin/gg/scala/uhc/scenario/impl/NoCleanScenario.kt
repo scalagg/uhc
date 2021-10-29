@@ -1,5 +1,6 @@
 package gg.scala.uhc.scenario.impl
 
+import com.cryptomorin.xseries.XMaterial
 import gg.scala.uhc.scenario.Scenario
 import org.bukkit.event.Listener
 
@@ -27,7 +28,11 @@ class NoCleanScenario : Scenario(
 
     override fun initialize()
     {
-        // TODO: 10/28/2021 handle no clean?
-        // really have no clue what no clean even is LOL
+        // TODO: 10/28/2021 handle no clean functionality
+    }
+
+    override fun material(): XMaterial
+    {
+        return XMaterial.CHEST
     }
 }
