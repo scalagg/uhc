@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.31'
+    implementation 'commons-io:commons-io:2.11.0'
     compileOnly "me.lucko:helper:5.6.8"
 
     compileOnly "io.papermc:paperlib:1.0.6"

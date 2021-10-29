@@ -22,4 +22,6 @@ object UhcGameHandler
     var type = UhcGameType.FFA
 
     var host: Player? = null
+
+
 }

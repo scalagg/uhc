@@ -6,6 +6,7 @@ import net.evilblock.cubed.util.bukkit.FancyMessage
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
+import java.util.*
 
 /**
  * @author GrowlyX
@@ -42,4 +43,20 @@ fun sendToWhomHasEnabled(message: FancyMessage, value: String)
         .forEach { player ->
             message.sendToPlayer(player)
         }
+}
+
+fun <T> MutableList<T>.add(vararg values: T)
+{
+    for (value in values)
+    {
+        add(value)
+    }
+}
+
+fun <T> LinkedList<T>.add(vararg values: T)
+{
+    for (value in values)
+    {
+        add(value)
+    }
 }

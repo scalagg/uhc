@@ -5,6 +5,7 @@ import gg.scala.lemon.Lemon
 import gg.scala.uhc.board.UhcBoardProvider
 import gg.scala.uhc.command.UhcCommand
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
+import gg.scala.uhc.handler.UhcDataHandler
 import gg.scala.uhc.handler.UhcUpdateHandler
 import gg.scala.uhc.listener.PlayerListener
 import gg.scala.uhc.listener.PvPListener
@@ -18,6 +19,7 @@ import net.evilblock.cubed.command.manager.CubedCommandManager
 import net.evilblock.cubed.nametag.NametagHandler
 import net.evilblock.cubed.scoreboard.ScoreboardHandler
 import net.evilblock.cubed.visibility.VisibilityHandler
+import org.bukkit.Bukkit
 
 /**
  * @author GrowlyX
@@ -35,10 +37,13 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
     {
         instance = this
 
-        syncLoadCosmetics()
         syncLoadResources()
+        syncLoadCosmetics()
         syncLoadCommands()
         syncLoadListeners()
+
+        // Setting the whitelist to true
+        Bukkit.setWhitelist(true)
     }
 
     private fun syncLoadListeners()
@@ -64,6 +69,8 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
 
     private fun syncLoadResources()
     {
+        UhcDataHandler.initialLoad()
+
         ConfigEntryParser.initialLoad()
         UhcUpdateHandler.initialLoad()
         ScenarioHandler.initialLoad()

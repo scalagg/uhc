@@ -12,6 +12,7 @@ object UhcUpdateHandler : Runnable
 {
     var remaining = 0
     var spectating = 0
+    var scattered = 0
 
     fun initialLoad()
     {
@@ -31,7 +32,9 @@ object UhcUpdateHandler : Runnable
         remaining = Bukkit.getOnlinePlayers()
             .filter { it.hasMetadata("playing") }.size
         spectating = Bukkit.getOnlinePlayers()
-            .filter { it.hasMetadata("playing") }.size
+            .filter { it.hasMetadata("spectating") }.size
+        scattered = Bukkit.getOnlinePlayers()
+            .filter { it.hasMetadata("scattered") }.size
 
         Lemon.instance.localInstance
             .metaData["game-state"] = UhcGameHandler.state.name
