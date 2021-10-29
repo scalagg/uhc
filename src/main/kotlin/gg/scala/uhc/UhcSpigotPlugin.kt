@@ -4,7 +4,9 @@ import gg.scala.commons.ExtendedScalaPlugin
 import gg.scala.lemon.Lemon
 import gg.scala.uhc.board.UhcBoardProvider
 import gg.scala.uhc.command.UhcCommand
+import gg.scala.uhc.configuration.UhcGameConfig
 import gg.scala.uhc.configuration.parser.ConfigEntryParser
+import gg.scala.uhc.configuration.preset.PresetConfigHandler
 import gg.scala.uhc.handler.UhcDataHandler
 import gg.scala.uhc.handler.UhcUpdateHandler
 import gg.scala.uhc.listener.PlayerListener
@@ -20,6 +22,7 @@ import net.evilblock.cubed.nametag.NametagHandler
 import net.evilblock.cubed.scoreboard.ScoreboardHandler
 import net.evilblock.cubed.visibility.VisibilityHandler
 import org.bukkit.Bukkit
+import org.bukkit.event.Listener
 
 /**
  * @author GrowlyX
@@ -45,8 +48,10 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
         // Setting the whitelist to true
         Bukkit.setWhitelist(true)
     }
-    
-    private fun internalListenerLoad(vararg listeners: Listener)
+
+    private fun internalListenerLoad(
+        vararg listeners: Listener
+    )
     {
         for (listener in listeners)
         {
@@ -79,9 +84,11 @@ class UhcSpigotPlugin : ExtendedScalaPlugin()
     {
         UhcDataHandler.initialLoad()
 
+        PresetConfigHandler.initialLoad()
         ConfigEntryParser.initialLoad()
         UhcUpdateHandler.initialLoad()
         ScenarioHandler.initialLoad()
+        UhcGameConfig.initialLoad()
 
         ScheduledExecutionHandler.register(PvPEnableEventExecutor)
         ScheduledExecutionHandler.register(FinalHealEventExecutor)

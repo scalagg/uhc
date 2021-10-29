@@ -4,6 +4,7 @@ import gg.scala.lemon.util.QuickAccess
 import gg.scala.uhc.add
 import gg.scala.uhc.handler.UhcGameHandler
 import gg.scala.uhc.model.UhcGameState
+import gg.scala.uhc.model.UhcGameType
 import gg.scala.uhc.scenario.ScenarioHandler
 import net.evilblock.cubed.scoreboard.ScoreboardAdapter
 import net.evilblock.cubed.util.CC
@@ -43,7 +44,7 @@ object UhcBoardProvider : ScoreboardAdapter()
                     "",
                     "Scenarios (${CC.PRI}/scenarios${CC.RESET}):"
                 )
-                
+
                 if (ScenarioHandler.selected.isNotEmpty())
                 {
                     ScenarioHandler.selected.forEach {
@@ -65,6 +66,14 @@ object UhcBoardProvider : ScoreboardAdapter()
     }
 
     override fun getTitle(player: Player): String {
-        return "${CC.B_PRI}UHC ${UhcGameHandler.type.formatted.uppercase()}"
+        return "${CC.B_PRI}${
+            when (UhcGameHandler.type)
+            {
+                UhcGameType.FFA -> "UHC"
+                UhcGameType.TEAMS -> {
+                    "UHC "
+                }
+            }
+        }"
     }
 }
