@@ -2,9 +2,11 @@ package gg.scala.uhc.schedule.impl
 
 import gg.scala.lemon.util.task.DiminutionRunnable
 import gg.scala.uhc.border.UhcBorderHandler
+import gg.scala.uhc.configuration.defaults.border.BorderSizeConfig
 import gg.scala.uhc.schedule.ScheduledExecutor
 import gg.scala.uhc.sendToWhomHasEnabled
 import me.lucko.helper.Schedulers
+import me.lucko.helper.scheduler.Task
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.time.TimeUtil
 
@@ -14,23 +16,36 @@ import net.evilblock.cubed.util.time.TimeUtil
  */
 class BorderUpdateEventExecutor : ScheduledExecutor
 {
-    val borders = arrayOf(
-        400, 300, 
-    )
+    var currentUpdateTask: Task? = null
 
-    var index = -1
+    private val oneHundredIntervals = arrayOf(50, 25, 10)
+    private var indexForHundreds = -1
+
+    var currentInterval = 0
 
     override fun start()
     {
-        Schedulers.async().runRepeating(
-            BorderUpdateRunnable(2700, 500),
+        currentInterval = BorderSizeConfig.currentValue as Int
+
+        currentUpdateTask = Schedulers.async().runRepeating(
+            BorderUpdateRunnable(2700, currentInterval),
             0L, 20L
         )
     }
 
     fun calculateNextBorder()
     {
-
+        if (currentInterval > 100)
+        {
+            currentInterval -= 100
+        } else
+        {
+            if (currentInterval > 10)
+            {
+                indexForHundreds++
+                currentInterval = oneHundredIntervals[indexForHundreds]
+            }
+        }
     }
 
     override fun invokeAt(): Int = 0
@@ -50,7 +65,22 @@ class BorderUpdateEventExecutor : ScheduledExecutor
                 "${CC.SEC}The border has shrunk to ${CC.PRI}$next${CC.SEC}."
             )
 
+            // handles border update for
+            // the current border interval
             UhcBorderHandler.setBorder(next)
+
+            // retrieves the next border (if there is any)
+            calculateNextBorder()
+
+            // checks if this runnable is not
+            // handling the last border update
+            if (currentInterval != next)
+            {
+                currentUpdateTask = Schedulers.async().runRepeating(
+                    BorderUpdateRunnable(2700, currentInterval),
+                    0L, 20L
+                )
+            }
         }
 
         override fun onRun()
@@ -59,6 +89,5 @@ class BorderUpdateEventExecutor : ScheduledExecutor
                 "${CC.SEC}The border will shrink to ${CC.PRI}$next${CC.SEC} in ${CC.PRI}${TimeUtil.formatIntoDetailedString(seconds)}${CC.SEC}.", "uhc-broadcasts"
             )
         }
-
     }
 }
