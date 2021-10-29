@@ -1,5 +1,6 @@
 package gg.scala.uhc.configuration.preset.impl.regular
 
+import com.cryptomorin.xseries.XMaterial
 import gg.scala.uhc.configuration.defaults.FinalHealConfig
 import gg.scala.uhc.configuration.defaults.GracePeriodConfig
 import gg.scala.uhc.configuration.defaults.border.BorderIntervalConfig
@@ -15,6 +16,7 @@ object RegularFfaPresetConfig : PresetConfig
 {
     override fun name(): String = "Regular FFA"
     override fun description(): String = "Classic CutClean FFA."
+    override fun xMaterial(): XMaterial = XMaterial.GOLDEN_APPLE
 
     override fun details(): List<String> = listOf(
         "1500x1500 Border Size",

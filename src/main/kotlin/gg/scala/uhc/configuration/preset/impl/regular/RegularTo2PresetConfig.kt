@@ -1,5 +1,6 @@
 package gg.scala.uhc.configuration.preset.impl.regular
 
+import com.cryptomorin.xseries.XMaterial
 import gg.scala.uhc.configuration.defaults.FinalHealConfig
 import gg.scala.uhc.configuration.defaults.GracePeriodConfig
 import gg.scala.uhc.configuration.defaults.TeamSizeConfig
@@ -18,6 +19,7 @@ object RegularTo2PresetConfig : PresetConfig
 {
     override fun name(): String = "Regular TO2"
     override fun description(): String = "Classic CutClean Duos."
+    override fun xMaterial(): XMaterial = XMaterial.GOLDEN_APPLE
 
     override fun details(): List<String> = listOf(
         "1500x1500 Border Size",

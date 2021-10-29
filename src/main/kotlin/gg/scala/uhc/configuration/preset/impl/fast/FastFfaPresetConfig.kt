@@ -1,5 +1,6 @@
 package gg.scala.uhc.configuration.preset.impl.fast
 
+import com.cryptomorin.xseries.XMaterial
 import gg.scala.uhc.configuration.defaults.FinalHealConfig
 import gg.scala.uhc.configuration.defaults.GracePeriodConfig
 import gg.scala.uhc.configuration.defaults.border.BorderIntervalConfig
@@ -15,6 +16,7 @@ object FastFfaPresetConfig : PresetConfig
 {
     override fun name(): String = "Fast FFA"
     override fun description(): String = "Fast-paced free-for-all game."
+    override fun xMaterial(): XMaterial = XMaterial.SUGAR
 
     override fun details(): List<String> = listOf(
         "1000x1000 Border Size",
