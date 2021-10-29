@@ -14,7 +14,13 @@ class UhcPlayer(
     var username: String
 ) : Savable
 {
+    // These act as persistent statistics;
 
+    // Local/current-game statistics should
+    // be stored using Player#setMetaData.
+    var kills = 0
+    var deaths = 0
+    var wins = 0
 
     override fun save(): CompletableFuture<Void>
     {
