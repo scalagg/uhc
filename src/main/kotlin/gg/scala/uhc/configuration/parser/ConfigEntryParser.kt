@@ -1,11 +1,9 @@
 package gg.scala.uhc.configuration.parser
 
-import gg.scala.uhc.configuration.parser.impl.BooleanEntryParser
-import gg.scala.uhc.configuration.parser.impl.IntEntryParser
-import gg.scala.uhc.configuration.parser.impl.LongEntryParser
-import gg.scala.uhc.configuration.parser.impl.StringEntryParser
+import gg.scala.uhc.configuration.parser.impl.*
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.prompt.InputPrompt
+import net.evilblock.cubed.util.time.Duration
 import org.bukkit.entity.Player
 import java.util.*
 
@@ -23,6 +21,7 @@ object ConfigEntryParser
         adapters[Int::class.java] = IntEntryParser()
         adapters[Long::class.java] = LongEntryParser()
         adapters[String::class.java] = StringEntryParser()
+        adapters[Duration::class.java] = DurationEntryParser()
     }
 
     fun <T> promptPlayer(

@@ -1,6 +1,7 @@
 package gg.scala.uhc.configuration.parser.impl
 
 import gg.scala.uhc.configuration.parser.ConfigEntryParserAdapter
+import net.evilblock.cubed.util.time.Duration
 
 /**
  * @author GrowlyX
@@ -36,4 +37,12 @@ class StringEntryParser : ConfigEntryParserAdapter<String>
     override fun parse(input: String): String = input
 
     override fun examples(): Array<String> = arrayOf()
+}
+
+class DurationEntryParser : ConfigEntryParserAdapter<Duration>
+{
+    override fun id(): String = "duration"
+    override fun parse(input: String): Duration = Duration.parse(input)
+
+    override fun examples(): Array<String> = arrayOf("1d", "1w", "1d1w")
 }
